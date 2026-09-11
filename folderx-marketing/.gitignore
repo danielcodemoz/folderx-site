@@ -1,0 +1,44 @@
+# Ignore node modules and dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore actual executable files (too large for git)
+download/*.exe
+download/*.msi
+download/*.dmg
+download/*.zip
+!download/.gitkeep
+
+# Ignore original PNG files (only keep optimized WebP)
+shots/*.png
+!shots/.gitkeep
+
+# Ignore temporary conversion files
+*.tmp
+*.temp
+assets/*.png
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Ignore logs
+*.log
+
+# Ignore backup files
+*.bak
+*.backup
+
+# Keep SVG sources but ignore generated WebP during development
+# (Uncomment to ignore generated webp, but we want them in repo)
+# assets/folderx-cover.webp

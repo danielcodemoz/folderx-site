@@ -1,0 +1,73 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="1200" y2="750" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="50%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="folder-gradient" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="750" fill="url(#bg-gradient)"/>
+  
+  <!-- Grid pattern overlay -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="750" fill="url(#grid)"/>
+  
+  <!-- Large folder icon (center-left) -->
+  <g transform="translate(150, 200)">
+    <path d="M40 60C40 51.7157 46.7157 45 55 45H100L120 70H265C273.284 70 280 76.7157 280 85V295C280 303.284 273.284 310 265 310H55C46.7157 310 40 303.284 40 295V60Z" 
+          fill="url(#folder-gradient)" opacity="0.9" filter="drop-shadow(0 20px 40px rgba(0,0,0,0.3))"/>
+    <circle cx="220" cy="200" r="40" fill="#1a1a1a"/>
+    <path d="M220 180V220M200 200H240" stroke="#14b8a6" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Medium folder (top-right) -->
+  <g transform="translate(750, 100)">
+    <path d="M20 30C20 25.5817 23.5817 22 28 22H50L60 35H130C134.418 35 138 38.5817 138 43V107C138 111.418 134.418 115 130 115H28C23.5817 115 20 111.418 20 107V30Z" 
+          fill="rgba(94,234,212,0.8)" filter="drop-shadow(0 8px 16px rgba(0,0,0,0.2))"/>
+    <text x="79" y="75" font-family="Arial, sans-serif" font-size="14" fill="#1a1a1a" text-anchor="middle" font-weight="bold">React</text>
+  </g>
+  
+  <!-- Small folder (bottom-right) -->
+  <g transform="translate(900, 500)">
+    <path d="M10 15C10 12.2386 12.2386 10 15 10H30L36 18H80C82.7614 18 85 20.2386 85 23V67C85 69.7614 82.7614 72 80 72H15C12.2386 72 10 69.7614 10 67V15Z" 
+          fill="rgba(45,212,191,0.7)" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.15))"/>
+    <text x="47.5" y="45" font-family="Arial, sans-serif" font-size="10" fill="#1a1a1a" text-anchor="middle" font-weight="bold">Design</text>
+  </g>
+  
+  <!-- FOLDER X logo and text (right side) -->
+  <g transform="translate(650, 320)">
+    <!-- Logo icon -->
+    <g transform="scale(2)">
+      <path d="M8 11C8 9.34315 9.34315 8 11 8H16L19 12H33C34.6569 12 36 13.3431 36 15V31C36 32.6569 34.6569 34 33 34H11C9.34315 34 8 32.6569 8 31V11Z" fill="white" opacity="0.95"/>
+      <circle cx="28" cy="24" r="6" fill="#14b8a6"/>
+      <path d="M28 21V27M25 24H31" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    
+    <!-- Text -->
+    <text x="100" y="35" font-family="Arial, sans-serif" font-size="72" fill="white" font-weight="bold" letter-spacing="-2">FOLDER<tspan fill="#1a1a1a">X</tspan></text>
+    <text x="100" y="75" font-family="Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.9)" font-weight="300">v1.0.1</text>
+    
+    <!-- Tagline -->
+    <text x="100" y="130" font-family="Arial, sans-serif" font-size="28" fill="white" font-weight="600">Templates. Organização. Controlo.</text>
+    
+    <!-- Features list -->
+    <g transform="translate(100, 170)">
+      <text y="0" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.95)"> Templates prontos (Academic, React, Laravel)</text>
+      <text y="35" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.95)"> Organização inteligente por regras</text>
+      <text y="70" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.95)"> Renomear, dividir, aplanar pastas</text>
+      <text y="105" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.95)"> Análise de espaço e duplicados</text>
+    </g>
+  </g>
+  
+  <!-- Bottom tag -->
+  <text x="600" y="710" font-family="Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.7)" text-anchor="middle">Windows 10/11 · Gratuito · folderx.danielpro.dev</text>
+</svg>
