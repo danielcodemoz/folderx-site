@@ -41,52 +41,24 @@
                 </svg>
                 <span class="logo-text">FOLDER<span class="logo-x">X</span></span>
             </a>
-            <div class="nav-controls">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                    <svg class="theme-icon theme-light" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <svg class="theme-icon theme-dark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-                <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
-                    <span class="lang-pt active">PT</span>
-                    <span class="lang-divider">/</span>
-                    <span class="lang-en">EN</span>
-                </button>
-            </div>
             <div class="nav-links">
-                <a href="#funcionalidades" data-en="Features">Funcionalidades</a>
+                <a href="#funcionalidades">Funcionalidades</a>
                 <a href="#templates">Templates</a>
-                <a href="#download" class="nav-cta" data-en="Download">Descarregar</a>
+                <a href="#download" class="nav-cta">Descarregar</a>
             </div>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-        <div class="mobile-menu" id="mobile-menu">
-            <a href="#funcionalidades" data-en="Features">Funcionalidades</a>
-            <a href="#templates">Templates</a>
-            <a href="#download" data-en="Download">Descarregar</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <canvas id="folder-canvas" class="hero-canvas"></canvas>
-        <div class="grain-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <div class="hero-badge" data-en="v1.0.1 — Windows Desktop">v1.0.1 — Windows Desktop</div>
+                <div class="hero-badge">v1.0.1 — Windows Desktop</div>
                 <h1 class="hero-title">
-                    <span data-en="From chaos to">Do caos à</span><br>
-                    <span class="gradient-text" data-en="absolute clarity">clareza absoluta</span>
+                    Do caos à<br>
+                    <span class="gradient-text">clareza absoluta</span>
                 </h1>
-                <p class="hero-subtitle" data-en="Ready-made templates. Intelligent organization. Batch renaming. Transform thousands of folders in seconds.">
+                <p class="hero-subtitle">
                     Templates prontos. Organização inteligente. Renomeação em massa.<br>
                     Transforme milhares de pastas em segundos.
                 </p>
@@ -96,46 +68,46 @@
                             <path d="M12 3V15M12 15L8 11M12 15L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M3 15V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
-                        <span data-en="Download installer">Descarregar instalador</span>
+                        Descarregar instalador
                     </a>
                     <a href="#download" class="btn btn-secondary">
-                        <span data-en="Portable version">Versão portátil</span>
+                        Versão portátil
                     </a>
                 </div>
                 <div class="hero-meta">
-                    <span data-en="Free">Gratuito</span> · Windows 10/11 · 45 MB
+                    Gratuito · Windows 10/11 · ~76 MB
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-folders">
+                    <div class="folder folder-1" data-speed="2">
+                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#14b8a6" opacity="0.9"/>
+                            <text x="60" y="60" font-family="Outfit" font-size="12" fill="#fff" text-anchor="middle" font-weight="600">Design</text>
+                        </svg>
+                    </div>
+                    <div class="folder folder-2" data-speed="3">
+                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#2dd4bf" opacity="0.8"/>
+                            <text x="60" y="60" font-family="Outfit" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="600">React</text>
+                        </svg>
+                    </div>
+                    <div class="folder folder-3" data-speed="1.5">
+                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#0d9488" opacity="0.95"/>
+                            <text x="60" y="60" font-family="Outfit" font-size="11" fill="#fff" text-anchor="middle" font-weight="600">Academic</text>
+                        </svg>
+                    </div>
+                    <div class="folder folder-4" data-speed="2.5">
+                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#5eead4" opacity="0.7"/>
+                            <text x="60" y="60" font-family="Outfit" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="600">Laravel</text>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="hero-gradient"></div>
-    </section>
-
-    <!-- Proof Strip -->
-    <section class="proof-strip">
-        <div class="container">
-            <div class="proof-items">
-                <div class="proof-item">
-                    <div class="proof-icon">✓</div>
-                    <span data-en="100% Free">100% Gratuito</span>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">⚡</div>
-                    <span data-en="Lightning Fast">Ultra Rápido</span>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">🔒</div>
-                    <span data-en="Private & Secure">Privado & Seguro</span>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">💾</div>
-                    <span data-en="No Installation Required">Sem Instalação</span>
-                </div>
-                <div class="proof-item">
-                    <div class="proof-icon">🎯</div>
-                    <span data-en="6 Templates Included">6 Templates Incluídos</span>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- Features Section -->
@@ -262,44 +234,126 @@
                 <div class="template-preview reveal-left">
                     <div class="template-badge academic">ACADEMIC</div>
                     <div class="template-tree">
-                        <div class="tree-item"><span class="tree-icon">📁</span> project</div>
-                        <div class="tree-item tree-sub"><span class="tree-icon">📁</span> src</div>
-                        <div class="tree-item tree-sub2"><span class="tree-icon">📁</span> components</div>
-                        <div class="tree-item tree-sub2"><span class="tree-icon">📁</span> assets</div>
-                        <div class="tree-item tree-sub3"><span class="tree-icon">📁</span> images</div>
-                        <div class="tree-item tree-sub3"><span class="tree-icon">📁</span> css</div>
-                        <div class="tree-item tree-sub2"><span class="tree-icon">📁</span> utils</div>
-                        <div class="tree-item tree-sub"><span class="tree-icon">📁</span> public</div>
-                        <div class="tree-item tree-sub"><span class="tree-icon">📁</span> docs</div>
-                        <div class="tree-item tree-sub"><span class="tree-icon">📁</span> tests</div>
+                        <div class="tree-item">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            project
+                        </div>
+                        <div class="tree-item tree-sub">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            src
+                        </div>
+                        <div class="tree-item tree-sub2">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            components
+                        </div>
+                        <div class="tree-item tree-sub2">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            assets
+                        </div>
+                        <div class="tree-item tree-sub3">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            images
+                        </div>
+                        <div class="tree-item tree-sub3">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            css
+                        </div>
+                        <div class="tree-item tree-sub2">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            utils
+                        </div>
+                        <div class="tree-item tree-sub">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            public
+                        </div>
+                        <div class="tree-item tree-sub">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            docs
+                        </div>
+                        <div class="tree-item tree-sub">
+                            <span class="tree-icon">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            tests
+                        </div>
                     </div>
                 </div>
 
                 <div class="template-cards">
-                    <div class="template-card reveal">
+                    <button class="template-card reveal" data-template="academic" role="button" aria-label="Ver estrutura Academic Project">
+                        <div class="template-card-badge academic">ACADEMIC</div>
+                        <h3>Academic Project</h3>
+                        <p>12 pastas · 0 ficheiros</p>
+                        <small>Estrutura para trabalho académico</small>
+                    </button>
+                    <button class="template-card reveal" data-template="design" role="button" aria-label="Ver estrutura Design Project">
                         <div class="template-card-badge design">DESIGN</div>
                         <h3>Design Project</h3>
                         <p>11 pastas · 0 ficheiros</p>
                         <small>Estrutura para projetos de design</small>
-                    </div>
-                    <div class="template-card reveal">
+                    </button>
+                    <button class="template-card reveal" data-template="laravel" role="button" aria-label="Ver estrutura Laravel Project">
                         <div class="template-card-badge dev">DEV</div>
                         <h3>Laravel Project</h3>
                         <p>18 pastas · 0 ficheiros</p>
                         <small>Estrutura Laravel framework</small>
-                    </div>
-                    <div class="template-card reveal">
+                    </button>
+                    <button class="template-card reveal" data-template="react" role="button" aria-label="Ver estrutura React Project">
                         <div class="template-card-badge dev">DEV</div>
                         <h3>React Project</h3>
                         <p>14 pastas · 0 ficheiros</p>
                         <small>Estrutura React application</small>
-                    </div>
-                    <div class="template-card reveal">
+                    </button>
+                    <button class="template-card reveal" data-template="office" role="button" aria-label="Ver estrutura Office Documents">
                         <div class="template-card-badge office">OFFICE</div>
                         <h3>Office Documents</h3>
                         <p>9 pastas · 0 ficheiros</p>
                         <small>Organização geral de escritório</small>
-                    </div>
+                    </button>
+                    <button class="template-card reveal" data-template="web" role="button" aria-label="Ver estrutura Web Development">
+                        <div class="template-card-badge dev">DEV</div>
+                        <h3>Web Development</h3>
+                        <p>13 pastas · 0 ficheiros</p>
+                        <small>Estrutura para projetos web</small>
+                    </button>
                 </div>
             </div>
         </div>
@@ -308,52 +362,18 @@
     <!-- Screenshots Gallery -->
     <section class="gallery">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag" data-en="Screenshots">Capturas de Ecrã</span>
-                <h2 class="section-title" data-en="See it in action">Veja em ação</h2>
-            </div>
             <div class="gallery-grid">
                 <div class="gallery-item reveal-up">
-                    <div class="window-chrome">
-                        <div class="window-titlebar">
-                            <div class="window-controls">
-                                <span class="window-btn close"></span>
-                                <span class="window-btn minimize"></span>
-                                <span class="window-btn maximize"></span>
-                            </div>
-                            <div class="window-title">FOLDER X — Templates</div>
-                        </div>
-                        <img src="shots/01-templates-dark.webp" alt="Interface de templates do FOLDER X em modo escuro" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%231a1a1a%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%2314b8a6%22 font-family=%22Outfit%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3ETemplates Interface%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <div class="gallery-caption" data-en="Main Interface — Templates">Interface principal — Templates</div>
+                    <img src="shots/01-templates-dark.webp" alt="Interface de templates do FOLDER X em modo escuro" loading="lazy">
+                    <div class="gallery-caption">Interface principal — Templates</div>
                 </div>
                 <div class="gallery-item reveal-up">
-                    <div class="window-chrome">
-                        <div class="window-titlebar">
-                            <div class="window-controls">
-                                <span class="window-btn close"></span>
-                                <span class="window-btn minimize"></span>
-                                <span class="window-btn maximize"></span>
-                            </div>
-                            <div class="window-title">FOLDER X — Tree Structure</div>
-                        </div>
-                        <img src="shots/02-folder-tree.webp" alt="Estrutura de pastas hierárquica" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%231a1a1a%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%2314b8a6%22 font-family=%22Outfit%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3EFolder Tree%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <div class="gallery-caption" data-en="Folder Structure">Estrutura de Pastas</div>
+                    <img src="shots/02-folder-tree.webp" alt="Estrutura de pastas hierárquica" loading="lazy">
+                    <div class="gallery-caption">Estrutura de Pastas</div>
                 </div>
                 <div class="gallery-item reveal-up">
-                    <div class="window-chrome">
-                        <div class="window-titlebar">
-                            <div class="window-controls">
-                                <span class="window-btn close"></span>
-                                <span class="window-btn minimize"></span>
-                                <span class="window-btn maximize"></span>
-                            </div>
-                            <div class="window-title">FOLDER X — Other Features</div>
-                        </div>
-                        <img src="shots/03-outras-funcs.webp" alt="Outras funcionalidades organizacionais" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%231a1a1a%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%2314b8a6%22 font-family=%22Outfit%22 font-size=%2224%22 text-anchor=%22middle%22 dy=%22.3em%22%3EOther Features%3C/text%3E%3C/svg%3E'">
-                    </div>
-                    <div class="gallery-caption" data-en="Other Features">Outras Funcionalidades</div>
+                    <img src="shots/03-outras-funcs.webp" alt="Outras funcionalidades organizacionais" loading="lazy">
+                    <div class="gallery-caption">Outras Funcionalidades</div>
                 </div>
             </div>
         </div>
@@ -367,7 +387,7 @@
                     <span class="download-tag">v1.0.1 — Release Estável</span>
                     <h2 class="download-title">Pronto para organizar?</h2>
                     <p class="download-desc">
-                        Gratuito para Windows 10 e 11. Instalador de 45 MB ou versão portátil. Sem registos, sem subscrições.
+                        Gratuito para Windows 10 e 11. Instalador de ~76 MB ou versão portátil. Sem registos, sem subscrições.
                     </p>
                     <div class="download-buttons">
                         <a href="download/FOLDER%20X-Setup-1.0.1.exe" class="btn btn-primary btn-lg" download>
@@ -388,9 +408,27 @@
                         </a>
                     </div>
                     <div class="download-meta">
-                        <span>✓ Windows 10/11 64-bit</span>
-                        <span>✓ 45 MB</span>
-                        <span>✓ Sem instalação de bloatware</span>
+                        <span class="download-meta-item">
+                            <svg class="download-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Windows 10/11 64-bit
+                        </span>
+                        <span class="download-meta-item">
+                            <svg class="download-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            ~76 MB
+                        </span>
+                        <span class="download-meta-item">
+                            <svg class="download-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 11V7M12 7C12 5.89543 11.1046 5 10 5H9C7.89543 5 7 5.89543 7 7V11M12 7C12 5.89543 12.8954 5 14 5H15C16.1046 5 17 5.89543 17 7V11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Sem instalação de bloatware
+                        </span>
                     </div>
                 </div>
             </div>
@@ -398,6 +436,24 @@
     </section>
 
     <!-- Footer -->
+    <!-- Template Modal -->
+    <div id="templateModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+        <div class="modal-backdrop" aria-hidden="true"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <button class="modal-close" aria-label="Fechar modal" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalTree" class="modal-tree"></div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
