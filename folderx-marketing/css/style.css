@@ -631,8 +631,9 @@ body.dark-theme .section-tag {
     letter-spacing: -0.02em;
 }
 
-body.dark-theme .section-title {
-    color: #ffffff;
+body.dark-theme .section-title,
+body.dark-theme .section-header h2 {
+    color: #f8fafc;
 }
 
 /* === FEATURES SECTION === */
@@ -703,7 +704,7 @@ body.dark-theme .section-title {
 }
 
 body.dark-theme .feature-title {
-    color: #ffffff;
+    color: #f8fafc;
 }
 
 .feature-desc {
