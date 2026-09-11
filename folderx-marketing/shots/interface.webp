@@ -1,0 +1,81 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1600" height="1000" fill="#0f172a"/>
+  
+  <!-- Sidebar -->
+  <rect x="40" y="40" width="280" height="920" rx="12" fill="#1e293b"/>
+  
+  <!-- Sidebar Header -->
+  <text x="70" y="90" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#f1f5f9">FOLDER X</text>
+  
+  <!-- Sidebar Menu Items -->
+  <rect x="60" y="140" width="240" height="50" rx="8" fill="#14b8a6" opacity="0.2"/>
+  <text x="80" y="172" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#14b8a6">Templates</text>
+  
+  <rect x="60" y="210" width="240" height="50" rx="8" fill="#334155"/>
+  <text x="80" y="242" font-family="Arial, sans-serif" font-size="16" fill="#cbd5e1">Meus Projetos</text>
+  
+  <rect x="60" y="280" width="240" height="50" rx="8" fill="#334155"/>
+  <text x="80" y="312" font-family="Arial, sans-serif" font-size="16" fill="#cbd5e1">Configurações</text>
+  
+  <!-- Main Content Area -->
+  <rect x="360" y="40" width="1200" height="920" rx="12" fill="#1e293b"/>
+  
+  <!-- Header -->
+  <text x="400" y="100" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#f1f5f9">Templates</text>
+  <text x="400" y="135" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">Escolha um template para começar</text>
+  
+  <!-- Template Cards Grid -->
+  <!-- Row 1 -->
+  <g>
+    <rect x="400" y="180" width="340" height="220" rx="12" fill="#0f172a" stroke="#2dd4bf" stroke-width="2"/>
+    <rect x="420" y="200" width="60" height="60" rx="8" fill="#14b8a6"/>
+    <text x="500" y="240" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#f1f5f9">Projeto Web</text>
+    <text x="420" y="275" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Estrutura completa para</text>
+    <text x="420" y="295" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">desenvolvimento web</text>
+  </g>
+  
+  <g>
+    <rect x="770" y="180" width="340" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <rect x="790" y="200" width="60" height="60" rx="8" fill="#0d9488"/>
+    <text x="870" y="240" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#f1f5f9">Design System</text>
+    <text x="790" y="275" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Organize seus arquivos</text>
+    <text x="790" y="295" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">de design</text>
+  </g>
+  
+  <g>
+    <rect x="1140" y="180" width="340" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <rect x="1160" y="200" width="60" height="60" rx="8" fill="#0d9488"/>
+    <text x="1240" y="240" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#f1f5f9">Mobile App</text>
+    <text x="1160" y="275" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Template para apps</text>
+    <text x="1160" y="295" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">móveis</text>
+  </g>
+  
+  <!-- Row 2 -->
+  <g>
+    <rect x="400" y="430" width="340" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <rect x="420" y="450" width="60" height="60" rx="8" fill="#0d9488"/>
+    <text x="500" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#f1f5f9">API Backend</text>
+    <text x="420" y="525" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Estrutura para APIs</text>
+    <text x="420" y="545" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">e serviços</text>
+  </g>
+  
+  <g>
+    <rect x="770" y="430" width="340" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <rect x="790" y="450" width="60" height="60" rx="8" fill="#0d9488"/>
+    <text x="870" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#f1f5f9">Documentação</text>
+    <text x="790" y="525" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Organize docs do seu</text>
+    <text x="790" y="545" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">projeto</text>
+  </g>
+  
+  <g>
+    <rect x="1140" y="430" width="340" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <rect x="1160" y="450" width="60" height="60" rx="8" fill="#0d9488"/>
+    <text x="1240" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#f1f5f9">E-commerce</text>
+    <text x="1160" y="525" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8">Loja online completa</text>
+  </g>
+  
+  <!-- Bottom Action -->
+  <rect x="400" y="700" width="1080" height="80" rx="12" fill="#14b8a6" opacity="0.1"/>
+  <text x="420" y="745" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#2dd4bf">+ Criar Template Personalizado</text>
+</svg>
