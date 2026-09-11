@@ -1,10 +1,398 @@
-// FOLDER X — Interactive Features
-// Scroll reveals, smooth animations, and micro-interactions
+// FOLDER X — Interactive Features + Canvas Hero Animation
+// Continuous chaos→order→drift→chaos animation loop
 
 (function() {
     'use strict';
     
-    // === SCROLL REVEAL OBSERVER ===
+    // ===================================
+    // CANVAS HERO ANIMATION
+    // Chaos → Order folder animation
+    // ===================================
+    
+    class FolderCanvas {
+        constructor(canvasId) {
+            this.canvas = document.getElementById(canvasId);
+            if (!this.canvas) return;
+            
+            this.ctx = this.canvas.getContext('2d');
+            this.folders = [];
+            this.files = [];
+            this.phase = 'chaos'; // chaos → organizing → organized → drift-back → repeat
+            this.phaseTimer = 0;
+            this.phaseDuration = {
+                chaos: 3000,
+                organizing: 2000,
+                organized: 3000,
+                driftBack: 2000
+            };
+            
+            this.resize();
+            this.init();
+            this.animate();
+            
+            window.addEventListener('resize', () => {
+                this.resize();
+                this.calculateOrganizedPositions();
+            });
+        }
+        
+        resize() {
+            const rect = this.canvas.getBoundingClientRect();
+            this.canvas.width = rect.width * window.devicePixelRatio;
+            this.canvas.height = rect.height * window.devicePixelRatio;
+            this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            this.width = rect.width;
+            this.height = rect.height;
+        }
+        
+        init() {
+            const isDark = document.body.classList.contains('dark-theme');
+            const colors = isDark 
+                ? ['#14b8a6', '#2dd4bf', '#5eead4', '#0d9488']
+                : ['#14b8a6', '#2dd4bf', '#0d9488', '#5eead4'];
+            
+            this.folders = [];
+            this.files = [];
+            
+            // Create folders
+            for (let i = 0; i < 12; i++) {
+                this.folders.push({
+                    x: Math.random() * this.width,
+                    y: Math.random() * this.height,
+                    vx: (Math.random() - 0.5) * 2,
+                    vy: (Math.random() - 0.5) * 2,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotationSpeed: (Math.random() - 0.5) * 0.02,
+                    size: 40 + Math.random() * 40,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    opacity: 0.6 + Math.random() * 0.4,
+                    targetX: 0,
+                    targetY: 0,
+                    targetRotation: 0,
+                    chaosX: Math.random() * this.width,
+                    chaosY: Math.random() * this.height,
+                    chaosRotation: Math.random() * Math.PI * 2,
+                    label: ['Design', 'React', 'Academic', 'Laravel', 'Office', 'Docs', 'Assets', 'Utils', 'Tests', 'Config', 'Build', 'Dist'][i]
+                });
+            }
+            
+            // Create file dots
+            for (let i = 0; i < 30; i++) {
+                this.files.push({
+                    x: Math.random() * this.width,
+                    y: Math.random() * this.height,
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5,
+                    size: 4 + Math.random() * 6,
+                    opacity: 0.3 + Math.random() * 0.4,
+                    color: colors[Math.floor(Math.random() * colors.length)]
+                });
+            }
+            
+            this.calculateOrganizedPositions();
+        }
+        
+        calculateOrganizedPositions() {
+            const centerX = this.width / 2;
+            const centerY = this.height / 2;
+            const spacing = Math.min(this.width, this.height) * 0.15;
+            
+            // Tree structure positions
+            const positions = [
+                { x: 0, y: -spacing * 1.5 },      // Root
+                { x: -spacing, y: 0 },             // Left branch
+                { x: spacing, y: 0 },              // Right branch
+                { x: -spacing * 1.5, y: spacing },  // Left children
+                { x: -spacing * 0.5, y: spacing },
+                { x: spacing * 0.5, y: spacing },
+                { x: spacing * 1.5, y: spacing },
+                { x: -spacing, y: spacing * 2 },   // Bottom row
+                { x: 0, y: spacing * 2 },
+                { x: spacing, y: spacing * 2 },
+                { x: -spacing * 1.5, y: spacing * 2.5 },
+                { x: spacing * 1.5, y: spacing * 2.5 }
+            ];
+            
+            this.folders.forEach((folder, i) => {
+                if (i < positions.length) {
+                    folder.targetX = centerX + positions[i].x;
+                    folder.targetY = centerY + positions[i].y;
+                    folder.targetRotation = 0;
+                }
+            });
+        }
+        
+        updatePhase(deltaTime) {
+            this.phaseTimer += deltaTime;
+            
+            if (this.phase === 'chaos' && this.phaseTimer > this.phaseDuration.chaos) {
+                this.phase = 'organizing';
+                this.phaseTimer = 0;
+            } else if (this.phase === 'organizing' && this.phaseTimer > this.phaseDuration.organizing) {
+                this.phase = 'organized';
+                this.phaseTimer = 0;
+            } else if (this.phase === 'organized' && this.phaseTimer > this.phaseDuration.organized) {
+                this.phase = 'driftBack';
+                this.phaseTimer = 0;
+                // Save new chaos positions for next cycle
+                this.folders.forEach(folder => {
+                    folder.chaosX = Math.random() * this.width;
+                    folder.chaosY = Math.random() * this.height;
+                    folder.chaosRotation = Math.random() * Math.PI * 2;
+                });
+            } else if (this.phase === 'driftBack' && this.phaseTimer > this.phaseDuration.driftBack) {
+                this.phase = 'chaos';
+                this.phaseTimer = 0;
+            }
+        }
+        
+        drawFolder(folder) {
+            const ctx = this.ctx;
+            const isDark = document.body.classList.contains('dark-theme');
+            
+            ctx.save();
+            ctx.translate(folder.x, folder.y);
+            ctx.rotate(folder.rotation);
+            ctx.globalAlpha = folder.opacity;
+            
+            // Folder shape
+            const w = folder.size;
+            const h = folder.size * 0.7;
+            
+            // Shadow
+            if (isDark) {
+                ctx.shadowColor = folder.color;
+                ctx.shadowBlur = 20;
+            } else {
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+                ctx.shadowBlur = 10;
+            }
+            
+            // Folder body
+            ctx.fillStyle = folder.color;
+            ctx.beginPath();
+            ctx.roundRect(-w/2, -h/2, w, h, 4);
+            ctx.fill();
+            
+            // Folder tab
+            ctx.beginPath();
+            ctx.roundRect(-w/2, -h/2 - 8, w * 0.4, 8, 2);
+            ctx.fill();
+            
+            // Label (when organized)
+            if (this.phase === 'organized' && folder.size > 50) {
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = isDark ? '#0a0a0a' : '#ffffff';
+                ctx.font = '10px Outfit, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(folder.label.slice(0, 6), 0, 0);
+            }
+            
+            ctx.restore();
+        }
+        
+        drawFile(file) {
+            const ctx = this.ctx;
+            const isDark = document.body.classList.contains('dark-theme');
+            
+            ctx.save();
+            ctx.globalAlpha = file.opacity;
+            
+            if (isDark) {
+                ctx.shadowColor = file.color;
+                ctx.shadowBlur = 8;
+            }
+            
+            ctx.fillStyle = file.color;
+            ctx.beginPath();
+            ctx.arc(file.x, file.y, file.size, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.restore();
+        }
+        
+        drawConnections() {
+            if (this.phase !== 'organized') return;
+            
+            const ctx = this.ctx;
+            const isDark = document.body.classList.contains('dark-theme');
+            
+            ctx.save();
+            ctx.strokeStyle = isDark ? 'rgba(20, 184, 166, 0.3)' : 'rgba(20, 184, 166, 0.2)';
+            ctx.lineWidth = 2;
+            ctx.globalAlpha = 0.5;
+            
+            // Draw tree connections
+            const connections = [
+                [0, 1], [0, 2],          // Root to branches
+                [1, 3], [1, 4],          // Left branch
+                [2, 5], [2, 6],          // Right branch
+                [3, 7], [4, 8], [5, 9],  // To bottom row
+                [7, 10], [9, 11]         // Bottom connections
+            ];
+            
+            connections.forEach(([from, to]) => {
+                if (this.folders[from] && this.folders[to]) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.folders[from].x, this.folders[from].y);
+                    ctx.lineTo(this.folders[to].x, this.folders[to].y);
+                    ctx.stroke();
+                }
+            });
+            
+            ctx.restore();
+        }
+        
+        animate() {
+            const deltaTime = 16;
+            
+            this.ctx.clearRect(0, 0, this.width, this.height);
+            
+            // Update phase (continuous loop)
+            this.updatePhase(deltaTime);
+            
+            // Update and draw files
+            this.files.forEach(file => {
+                if (this.phase === 'chaos') {
+                    file.x += file.vx;
+                    file.y += file.vy;
+                    
+                    if (file.x < 0 || file.x > this.width) file.vx *= -1;
+                    if (file.y < 0 || file.y > this.height) file.vy *= -1;
+                }
+                
+                this.drawFile(file);
+            });
+            
+            // Draw connections first (behind folders)
+            this.drawConnections();
+            
+            // Update and draw folders
+            this.folders.forEach(folder => {
+                if (this.phase === 'chaos') {
+                    // Chaotic movement
+                    folder.x += folder.vx;
+                    folder.y += folder.vy;
+                    folder.rotation += folder.rotationSpeed;
+                    
+                    // Bounce off edges
+                    if (folder.x < 0 || folder.x > this.width) folder.vx *= -1;
+                    if (folder.y < 0 || folder.y > this.height) folder.vy *= -1;
+                } else if (this.phase === 'organizing') {
+                    // Smooth transition to organized position
+                    const speed = 0.08;
+                    folder.x += (folder.targetX - folder.x) * speed;
+                    folder.y += (folder.targetY - folder.y) * speed;
+                    folder.rotation += (folder.targetRotation - folder.rotation) * speed;
+                } else if (this.phase === 'organized') {
+                    // Stay in organized position with gentle float
+                    const time = Date.now() * 0.001;
+                    folder.x = folder.targetX + Math.sin(time + folder.targetX) * 2;
+                    folder.y = folder.targetY + Math.cos(time + folder.targetY) * 2;
+                } else if (this.phase === 'driftBack') {
+                    // Drift back to new chaos positions
+                    const speed = 0.06;
+                    folder.x += (folder.chaosX - folder.x) * speed;
+                    folder.y += (folder.chaosY - folder.y) * speed;
+                    folder.rotation += (folder.chaosRotation - folder.rotation) * speed;
+                }
+                
+                this.drawFolder(folder);
+            });
+            
+            requestAnimationFrame(() => this.animate());
+        }
+    }
+    
+    // ===================================
+    // THEME TOGGLE
+    // ===================================
+    
+    const initThemeToggle = () => {
+        const toggle = document.getElementById('theme-toggle');
+        if (!toggle) return;
+        
+        // Check saved preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+            document.body.classList.add('dark-theme');
+        }
+        
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Recreate canvas animation with new theme colors
+            if (window.folderCanvas) {
+                window.folderCanvas.init();
+            }
+        });
+    };
+    
+    // ===================================
+    // LANGUAGE TOGGLE
+    // ===================================
+    
+    const initLanguageToggle = () => {
+        const toggle = document.getElementById('lang-toggle');
+        if (!toggle) return;
+        
+        const ptBtn = toggle.querySelector('.lang-pt');
+        const enBtn = toggle.querySelector('.lang-en');
+        let currentLang = localStorage.getItem('lang') || 'pt';
+        
+        const setLanguage = (lang) => {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            
+            ptBtn.classList.toggle('active', lang === 'pt');
+            enBtn.classList.toggle('active', lang === 'en');
+            
+            // Update all elements with data-en attribute
+            if (lang === 'en') {
+                document.querySelectorAll('[data-en]').forEach(el => {
+                    const enText = el.getAttribute('data-en');
+                    if (!el.hasAttribute('data-pt')) {
+                        el.setAttribute('data-pt', el.textContent.trim());
+                    }
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = enText;
+                    } else if (el.hasAttribute('content')) {
+                        el.setAttribute('content', enText);
+                    } else {
+                        el.textContent = enText;
+                    }
+                });
+            } else {
+                document.querySelectorAll('[data-pt]').forEach(el => {
+                    const ptText = el.getAttribute('data-pt');
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = ptText;
+                    } else if (el.hasAttribute('content')) {
+                        el.setAttribute('content', ptText);
+                    } else {
+                        el.textContent = ptText;
+                    }
+                });
+            }
+        };
+        
+        // Initialize with saved language
+        setLanguage(currentLang);
+        
+        toggle.addEventListener('click', () => {
+            setLanguage(currentLang === 'pt' ? 'en' : 'pt');
+        });
+    };
+    
+    // ===================================
+    // SCROLL REVEAL OBSERVER
+    // ===================================
+    
     const revealElements = () => {
         const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-up');
         
@@ -23,22 +411,10 @@
         reveals.forEach(el => observer.observe(el));
     };
     
-    // === PARALLAX FLOATING FOLDERS ===
-    const initParallax = () => {
-        const folders = document.querySelectorAll('.folder');
-        
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            
-            folders.forEach(folder => {
-                const speed = folder.dataset.speed || 1;
-                const yPos = -(scrolled * speed * 0.05);
-                folder.style.transform = `translateY(${yPos}px)`;
-            });
-        });
-    };
+    // ===================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // ===================================
     
-    // === SMOOTH SCROLL FOR ANCHOR LINKS ===
     const initSmoothScroll = () => {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -61,7 +437,10 @@
         });
     };
     
-    // === NAVIGATION SCROLL BEHAVIOR ===
+    // ===================================
+    // NAVIGATION SCROLL BEHAVIOR
+    // ===================================
+    
     const initNavScroll = () => {
         const nav = document.querySelector('.nav');
         let lastScroll = 0;
@@ -86,421 +465,264 @@
         });
     };
     
-    // === FEATURE CARD TILT EFFECT ===
-    const initCardTilt = () => {
-        const cards = document.querySelectorAll('.feature-card');
-        
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / centerY) * -3;
-                const rotateY = ((x - centerX) / centerX) * 3;
-                
-                card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) perspective(1000px) rotateX(0) rotateY(0)';
-            });
-        });
-    };
+    // ===================================
+    // TEMPLATE MODAL
+    // ===================================
     
-    // === ANIMATED COUNTER (for stats if needed) ===
-    const animateCounter = (element, target, duration = 2000) => {
-        const start = 0;
-        const increment = target / (duration / 16);
-        let current = start;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                element.textContent = Math.round(target);
-                clearInterval(timer);
-            } else {
-                element.textContent = Math.round(current);
-            }
-        }, 16);
-    };
-    
-    // === DOWNLOAD BUTTON RIPPLE EFFECT ===
-    const initRippleEffect = () => {
-        const buttons = document.querySelectorAll('.btn');
-        
-        buttons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.classList.add('ripple');
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-    };
-    
-    // === CURSOR GLOW EFFECT (desktop only) ===
-    const initCursorGlow = () => {
-        if (window.innerWidth < 1024) return;
-        
-        const glow = document.createElement('div');
-        glow.className = 'cursor-glow';
-        document.body.appendChild(glow);
-        
-        document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-        });
-    };
-    
-    // === LAZY LOAD IMAGES ===
-    const initLazyLoad = () => {
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.src;
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        images.forEach(img => imageObserver.observe(img));
-    };
-    
-    // === FOLD ANIMATION ON LOAD ===
-    const initLoadAnimation = () => {
-        document.body.style.opacity = '0';
-        
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.body.style.transition = 'opacity 0.6s ease';
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-    };
-    
-    // === TEMPLATE TREE HOVER HIGHLIGHT ===
-    const initTreeHighlight = () => {
-        const treeItems = document.querySelectorAll('.tree-item');
-        
-        treeItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                item.style.background = 'rgba(20, 184, 166, 0.1)';
-            });
-            
-            item.addEventListener('mouseleave', () => {
-                item.style.background = 'rgba(255, 255, 255, 0.05)';
-            });
-        });
-    };
-    
-    // === TEMPLATE MODAL SYSTEM ===
-    const templateTrees = {
+    const templateData = {
         academic: {
             title: 'Academic Project',
+            titleEn: 'Academic Project',
+            description: 'Estrutura para trabalho académico completo',
+            descriptionEn: 'Complete academic work structure',
+            badge: 'ACADEMIC',
             tree: [
-                { name: 'project', level: 0 },
-                { name: 'research', level: 1 },
-                { name: 'papers', level: 2 },
-                { name: 'notes', level: 2 },
-                { name: 'data', level: 1 },
-                { name: 'raw', level: 2 },
-                { name: 'processed', level: 2 },
-                { name: 'analysis', level: 1 },
-                { name: 'scripts', level: 2 },
-                { name: 'results', level: 2 },
-                { name: 'literature', level: 1 },
-                { name: 'references', level: 2 },
-                { name: 'thesis', level: 1 },
-                { name: 'chapters', level: 2 },
-                { name: 'figures', level: 2 }
+                { name: 'project', level: 0, type: 'folder' },
+                { name: 'src', level: 1, type: 'folder' },
+                { name: 'chapters', level: 2, type: 'folder' },
+                { name: 'bibliography', level: 2, type: 'folder' },
+                { name: 'images', level: 2, type: 'folder' },
+                { name: 'data', level: 2, type: 'folder' },
+                { name: 'docs', level: 1, type: 'folder' },
+                { name: 'references', level: 1, type: 'folder' },
+                { name: 'presentations', level: 1, type: 'folder' },
+                { name: 'notes', level: 1, type: 'folder' },
+                { name: 'drafts', level: 1, type: 'folder' },
+                { name: 'final', level: 1, type: 'folder' }
             ]
         },
         design: {
             title: 'Design Project',
+            titleEn: 'Design Project',
+            description: 'Estrutura para projetos de design',
+            descriptionEn: 'Design project structure',
+            badge: 'DESIGN',
             tree: [
-                { name: 'project', level: 0 },
-                { name: 'assets', level: 1 },
-                { name: 'images', level: 2 },
-                { name: 'icons', level: 2 },
-                { name: 'fonts', level: 2 },
-                { name: 'designs', level: 1 },
-                { name: 'wireframes', level: 2 },
-                { name: 'mockups', level: 2 },
-                { name: 'finals', level: 2 },
-                { name: 'branding', level: 1 },
-                { name: 'logo', level: 2 },
-                { name: 'colors', level: 2 },
-                { name: 'exports', level: 1 },
-                { name: 'print', level: 2 },
-                { name: 'web', level: 2 }
+                { name: 'project', level: 0, type: 'folder' },
+                { name: 'assets', level: 1, type: 'folder' },
+                { name: 'images', level: 2, type: 'folder' },
+                { name: 'vectors', level: 2, type: 'folder' },
+                { name: 'fonts', level: 2, type: 'folder' },
+                { name: 'mockups', level: 1, type: 'folder' },
+                { name: 'branding', level: 1, type: 'folder' },
+                { name: 'ui-designs', level: 1, type: 'folder' },
+                { name: 'exports', level: 1, type: 'folder' },
+                { name: 'presentations', level: 1, type: 'folder' },
+                { name: 'references', level: 1, type: 'folder' }
             ]
         },
         laravel: {
             title: 'Laravel Project',
+            titleEn: 'Laravel Project',
+            description: 'Estrutura Laravel framework',
+            descriptionEn: 'Laravel framework structure',
+            badge: 'DEV',
             tree: [
-                { name: 'project', level: 0 },
-                { name: 'app', level: 1 },
-                { name: 'Http', level: 2 },
-                { name: 'Controllers', level: 3 },
-                { name: 'Middleware', level: 3 },
-                { name: 'Models', level: 2 },
-                { name: 'Services', level: 2 },
-                { name: 'resources', level: 1 },
-                { name: 'views', level: 2 },
-                { name: 'css', level: 2 },
-                { name: 'js', level: 2 },
-                { name: 'routes', level: 1 },
-                { name: 'database', level: 1 },
-                { name: 'migrations', level: 2 },
-                { name: 'seeders', level: 2 },
-                { name: 'public', level: 1 },
-                { name: 'storage', level: 1 },
-                { name: 'tests', level: 1 }
+                { name: 'project', level: 0, type: 'folder' },
+                { name: 'app', level: 1, type: 'folder' },
+                { name: 'Models', level: 2, type: 'folder' },
+                { name: 'Controllers', level: 2, type: 'folder' },
+                { name: 'Middleware', level: 2, type: 'folder' },
+                { name: 'resources', level: 1, type: 'folder' },
+                { name: 'views', level: 2, type: 'folder' },
+                { name: 'css', level: 2, type: 'folder' },
+                { name: 'js', level: 2, type: 'folder' },
+                { name: 'routes', level: 1, type: 'folder' },
+                { name: 'database', level: 1, type: 'folder' },
+                { name: 'migrations', level: 2, type: 'folder' },
+                { name: 'seeders', level: 2, type: 'folder' },
+                { name: 'public', level: 1, type: 'folder' },
+                { name: 'storage', level: 1, type: 'folder' },
+                { name: 'tests', level: 1, type: 'folder' },
+                { name: 'config', level: 1, type: 'folder' },
+                { name: 'vendor', level: 1, type: 'folder' }
             ]
         },
         react: {
             title: 'React Project',
+            titleEn: 'React Project',
+            description: 'Estrutura React application',
+            descriptionEn: 'React application structure',
+            badge: 'DEV',
             tree: [
-                { name: 'project', level: 0 },
-                { name: 'src', level: 1 },
-                { name: 'components', level: 2 },
-                { name: 'UI', level: 3 },
-                { name: 'Layout', level: 3 },
-                { name: 'hooks', level: 2 },
-                { name: 'services', level: 2 },
-                { name: 'utils', level: 2 },
-                { name: 'pages', level: 2 },
-                { name: 'assets', level: 2 },
-                { name: 'images', level: 3 },
-                { name: 'styles', level: 3 },
-                { name: 'public', level: 1 },
-                { name: 'tests', level: 1 },
-                { name: 'docs', level: 1 }
+                { name: 'project', level: 0, type: 'folder' },
+                { name: 'src', level: 1, type: 'folder' },
+                { name: 'components', level: 2, type: 'folder' },
+                { name: 'hooks', level: 2, type: 'folder' },
+                { name: 'context', level: 2, type: 'folder' },
+                { name: 'pages', level: 2, type: 'folder' },
+                { name: 'utils', level: 2, type: 'folder' },
+                { name: 'assets', level: 2, type: 'folder' },
+                { name: 'styles', level: 2, type: 'folder' },
+                { name: 'public', level: 1, type: 'folder' },
+                { name: 'tests', level: 1, type: 'folder' },
+                { name: 'config', level: 1, type: 'folder' },
+                { name: 'build', level: 1, type: 'folder' },
+                { name: 'node_modules', level: 1, type: 'folder' }
             ]
         },
         office: {
             title: 'Office Documents',
+            titleEn: 'Office Documents',
+            description: 'Organização geral de escritório',
+            descriptionEn: 'General office organization',
+            badge: 'OFFICE',
             tree: [
-                { name: 'documents', level: 0 },
-                { name: 'reports', level: 1 },
-                { name: 'monthly', level: 2 },
-                { name: 'quarterly', level: 2 },
-                { name: 'presentations', level: 1 },
-                { name: 'spreadsheets', level: 1 },
-                { name: 'budgets', level: 2 },
-                { name: 'invoices', level: 2 },
-                { name: 'contracts', level: 1 },
-                { name: 'meetings', level: 1 },
-                { name: 'archive', level: 1 }
+                { name: 'project', level: 0, type: 'folder' },
+                { name: 'documents', level: 1, type: 'folder' },
+                { name: 'spreadsheets', level: 1, type: 'folder' },
+                { name: 'presentations', level: 1, type: 'folder' },
+                { name: 'reports', level: 1, type: 'folder' },
+                { name: 'templates', level: 1, type: 'folder' },
+                { name: 'archive', level: 1, type: 'folder' },
+                { name: 'inbox', level: 1, type: 'folder' },
+                { name: 'drafts', level: 1, type: 'folder' },
+                { name: 'final', level: 1, type: 'folder' }
             ]
         },
         web: {
             title: 'Web Development',
+            titleEn: 'Web Development',
+            description: 'Estrutura para projetos web',
+            descriptionEn: 'Web project structure',
+            badge: 'DEV',
             tree: [
-                { name: 'project', level: 0 },
-                { name: 'src', level: 1 },
-                { name: 'components', level: 2 },
-                { name: 'assets', level: 2 },
-                { name: 'images', level: 3 },
-                { name: 'css', level: 3 },
-                { name: 'js', level: 3 },
-                { name: 'utils', level: 2 },
-                { name: 'public', level: 1 },
-                { name: 'dist', level: 1 },
-                { name: 'docs', level: 1 },
-                { name: 'tests', level: 1 },
-                { name: 'config', level: 1 }
+                { name: 'project', level: 0, type: 'folder' },
+                { name: 'src', level: 1, type: 'folder' },
+                { name: 'components', level: 2, type: 'folder' },
+                { name: 'pages', level: 2, type: 'folder' },
+                { name: 'styles', level: 2, type: 'folder' },
+                { name: 'scripts', level: 2, type: 'folder' },
+                { name: 'assets', level: 1, type: 'folder' },
+                { name: 'images', level: 2, type: 'folder' },
+                { name: 'fonts', level: 2, type: 'folder' },
+                { name: 'public', level: 1, type: 'folder' },
+                { name: 'tests', level: 1, type: 'folder' },
+                { name: 'docs', level: 1, type: 'folder' },
+                { name: 'config', level: 1, type: 'folder' }
             ]
         }
     };
     
-    const folderIcon = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    
-    const initTemplateModal = () => {
-        const modal = document.getElementById('templateModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalTree = document.getElementById('modalTree');
-        const modalBackdrop = modal.querySelector('.modal-backdrop');
+    const initTemplateModals = () => {
+        const modal = document.getElementById('template-modal');
+        const modalOverlay = modal.querySelector('.modal-overlay');
         const modalClose = modal.querySelector('.modal-close');
-        const templateCards = document.querySelectorAll('.template-card[data-template]');
+        const modalBtnClose = modal.querySelector('.modal-btn-close');
+        const modalBtnGenerate = document.getElementById('modal-btn-generate');
+        const modalBadge = document.getElementById('modal-badge');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalTree = document.getElementById('modal-tree');
+        const templateCards = document.querySelectorAll('.template-card');
         
-        let previouslyFocused = null;
+        const toast = document.getElementById('toast');
         
-        const openModal = (template) => {
-            const data = templateTrees[template];
+        const showToast = () => {
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        };
+        
+        const openModal = (templateId) => {
+            const data = templateData[templateId];
             if (!data) return;
             
-            previouslyFocused = document.activeElement;
+            const currentLang = localStorage.getItem('lang') || 'pt';
             
-            modalTitle.textContent = data.title;
+            // Update modal content
+            modalBadge.textContent = data.badge;
+            modalBadge.className = 'modal-badge ' + (templateId === 'academic' ? 'academic' : templateId === 'office' ? 'office' : 'dev');
+            modalTitle.textContent = currentLang === 'en' ? data.titleEn : data.title;
+            modalDescription.textContent = currentLang === 'en' ? data.descriptionEn : data.description;
+            
+            // Build tree
             modalTree.innerHTML = '';
-            
             data.tree.forEach(item => {
                 const div = document.createElement('div');
                 div.className = `modal-tree-item level-${item.level}`;
-                div.innerHTML = `
-                    <div class="modal-tree-icon">${folderIcon}</div>
-                    <span>${item.name}</span>
+                
+                const icon = document.createElement('span');
+                icon.className = 'modal-tree-icon';
+                icon.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 7C3 5.89543 3.89543 5 5 5H9L11 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V7Z"/>
+                    </svg>
                 `;
+                
+                const name = document.createElement('span');
+                name.textContent = item.name;
+                
+                div.appendChild(icon);
+                div.appendChild(name);
                 modalTree.appendChild(div);
             });
             
-            modal.removeAttribute('hidden');
-            setTimeout(() => modalClose.focus(), 100);
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         };
         
         const closeModal = () => {
-            modal.setAttribute('hidden', '');
-            if (previouslyFocused) {
-                previouslyFocused.focus();
-            }
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Re-enable generate button
+            modalBtnGenerate.disabled = false;
         };
         
+        // Template card click handlers
         templateCards.forEach(card => {
             card.addEventListener('click', () => {
-                const template = card.dataset.template;
-                openModal(template);
+                const templateId = card.getAttribute('data-template');
+                openModal(templateId);
             });
         });
         
+        // Close modal handlers
+        modalOverlay.addEventListener('click', closeModal);
         modalClose.addEventListener('click', closeModal);
-        modalBackdrop.addEventListener('click', closeModal);
+        modalBtnClose.addEventListener('click', closeModal);
         
+        // Generate template handler
+        modalBtnGenerate.addEventListener('click', () => {
+            modalBtnGenerate.disabled = true;
+            
+            // Show toast
+            showToast();
+            
+            // Close modal after short delay
+            setTimeout(() => {
+                closeModal();
+            }, 1000);
+        });
+        
+        // Close modal on Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal.hasAttribute('hidden')) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal();
             }
         });
-        
-        modal.addEventListener('keydown', (e) => {
-            if (!modal.hasAttribute('hidden') && e.key === 'Tab') {
-                const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-                const firstElement = focusableElements[0];
-                const lastElement = focusableElements[focusableElements.length - 1];
-                
-                if (e.shiftKey && document.activeElement === firstElement) {
-                    e.preventDefault();
-                    lastElement.focus();
-                } else if (!e.shiftKey && document.activeElement === lastElement) {
-                    e.preventDefault();
-                    firstElement.focus();
-                }
-            }
-        });
     };
     
-    // === ADD RIPPLE CSS DYNAMICALLY ===
-    const addRippleStyles = () => {
-        const style = document.createElement('style');
-        style.textContent = `
-            .btn {
-                position: relative;
-                overflow: hidden;
-            }
-            .ripple {
-                position: absolute;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.6);
-                transform: scale(0);
-                animation: ripple-animation 0.6s ease-out;
-                pointer-events: none;
-            }
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
-            }
-            .cursor-glow {
-                position: fixed;
-                width: 300px;
-                height: 300px;
-                border-radius: 50%;
-                background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
-                pointer-events: none;
-                transform: translate(-50%, -50%);
-                z-index: 9999;
-                transition: opacity 0.3s ease;
-            }
-        `;
-        document.head.appendChild(style);
-    };
+    // ===================================
+    // INIT ALL
+    // ===================================
     
-    // === EASTER EGG: KONAMI CODE ===
-    const initKonamiCode = () => {
-        const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-        let konamiIndex = 0;
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.keyCode === konamiCode[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiCode.length) {
-                    activateEasterEgg();
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
-            }
-        });
-    };
-    
-    const activateEasterEgg = () => {
-        document.body.style.animation = 'rainbow 2s linear infinite';
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes rainbow {
-                0% { filter: hue-rotate(0deg); }
-                100% { filter: hue-rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        setTimeout(() => {
-            document.body.style.animation = '';
-        }, 5000);
-        
-        console.log('🎉 FOLDER X Easter Egg Activated! 🎉');
-    };
-    
-    // === INIT ALL ===
     const init = () => {
-        addRippleStyles();
-        initLoadAnimation();
+        initThemeToggle();
+        initLanguageToggle();
         revealElements();
-        initParallax();
         initSmoothScroll();
         initNavScroll();
-        initCardTilt();
-        initRippleEffect();
-        initLazyLoad();
-        initTreeHighlight();
-        initTemplateModal();
-        initKonamiCode();
+        initTemplateModals();
         
-        // Desktop-only features
-        if (window.innerWidth >= 1024) {
-            // initCursorGlow(); // Commented out for performance
-        }
+        // Initialize canvas animation
+        window.folderCanvas = new FolderCanvas('folder-canvas');
         
         // Log version
-        console.log('%cFOLDER X v1.0.1', 'font-size: 20px; font-weight: bold; color: #14b8a6;');
+        console.log('%cFOLDER X v1.0.1 — WOW Canvas Edition', 'font-size: 20px; font-weight: bold; color: #14b8a6;');
         console.log('%cWebsite by DanielPro', 'font-size: 12px; color: #6a6a6a;');
     };
     

@@ -41,73 +41,112 @@
                 </svg>
                 <span class="logo-text">FOLDER<span class="logo-x">X</span></span>
             </a>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="theme-icon theme-light" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="theme-icon theme-dark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+                    <span class="lang-pt active">PT</span>
+                    <span class="lang-divider">/</span>
+                    <span class="lang-en">EN</span>
+                </button>
+            </div>
             <div class="nav-links">
-                <a href="#funcionalidades">Funcionalidades</a>
+                <a href="#funcionalidades" data-en="Features">Funcionalidades</a>
                 <a href="#templates">Templates</a>
-                <a href="#download" class="nav-cta">Descarregar</a>
+                <a href="#download" class="nav-cta" data-en="Download">Descarregar</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
+        <canvas id="folder-canvas" class="hero-canvas"></canvas>
+        <div class="grain-overlay"></div>
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">v1.0.1 — Windows Desktop</div>
-                <h1 class="hero-title">
-                    Do caos à<br>
-                    <span class="gradient-text">clareza absoluta</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Templates prontos. Organização inteligente. Renomeação em massa.<br>
-                    Transforme milhares de pastas em segundos.
-                </p>
-                <div class="hero-ctas">
-                    <a href="#download" class="btn btn-primary">
-                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 3V15M12 15L8 11M12 15L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M3 15V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Descarregar instalador
-                    </a>
-                    <a href="#download" class="btn btn-secondary">
-                        Versão portátil
-                    </a>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge" data-en="v1.0.1 — Windows Desktop">v1.0.1 — Windows Desktop</div>
+                    <h1 class="hero-title">
+                        <span data-en="From chaos to">Do caos à</span><br>
+                        <span class="gradient-text" data-en="absolute clarity">clareza absoluta</span>
+                    </h1>
+                    <p class="hero-subtitle" data-en="Ready-made templates. Intelligent organization. Batch renaming. Transform thousands of folders in seconds.">
+                        Templates prontos. Organização inteligente. Renomeação em massa.<br>
+                        Transforme milhares de pastas em segundos.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="#download" class="btn btn-primary">
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 3V15M12 15L8 11M12 15L16 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 15V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <span data-en="Download installer">Descarregar instalador</span>
+                        </a>
+                        <a href="#download" class="btn btn-secondary">
+                            <span data-en="Portable version">Versão portátil</span>
+                        </a>
+                    </div>
+                    <div class="hero-meta">
+                        <span data-en="Free">Gratuito</span> · Windows 10/11 · ~76 MB
+                    </div>
                 </div>
-                <div class="hero-meta">
-                    Gratuito · Windows 10/11 · ~76 MB
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-folders">
-                    <div class="folder folder-1" data-speed="2">
-                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#14b8a6" opacity="0.9"/>
-                            <text x="60" y="60" font-family="Outfit" font-size="12" fill="#fff" text-anchor="middle" font-weight="600">Design</text>
-                        </svg>
-                    </div>
-                    <div class="folder folder-2" data-speed="3">
-                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#2dd4bf" opacity="0.8"/>
-                            <text x="60" y="60" font-family="Outfit" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="600">React</text>
-                        </svg>
-                    </div>
-                    <div class="folder folder-3" data-speed="1.5">
-                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#0d9488" opacity="0.95"/>
-                            <text x="60" y="60" font-family="Outfit" font-size="11" fill="#fff" text-anchor="middle" font-weight="600">Academic</text>
-                        </svg>
-                    </div>
-                    <div class="folder folder-4" data-speed="2.5">
-                        <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 20C15 15.5817 18.5817 12 23 12H40L48 22H103C107.418 22 111 25.5817 111 30V82C111 86.4183 107.418 90 103 90H23C18.5817 90 15 86.4183 15 82V20Z" fill="#5eead4" opacity="0.7"/>
-                            <text x="60" y="60" font-family="Outfit" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="600">Laravel</text>
-                        </svg>
-                    </div>
+                <div class="hero-canvas-wrapper">
+                    <!-- Canvas animation renders here (right side) -->
                 </div>
             </div>
         </div>
         <div class="hero-gradient"></div>
+    </section>
+
+    <!-- Proof Strip -->
+    <section class="proof-strip">
+        <div class="container">
+            <div class="proof-items">
+                <div class="proof-item">
+                    <svg class="proof-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span data-en="100% Free">100% Gratuito</span>
+                </div>
+                <div class="proof-item">
+                    <svg class="proof-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                    <span data-en="Lightning Fast">Ultra Rápido</span>
+                </div>
+                <div class="proof-item">
+                    <svg class="proof-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <span data-en="Private & Secure">Privado & Seguro</span>
+                </div>
+                <div class="proof-item">
+                    <svg class="proof-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="12" x2="2" y2="12"/>
+                        <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+                        <line x1="6" y1="16" x2="6.01" y2="16"/>
+                        <line x1="10" y1="16" x2="10.01" y2="16"/>
+                    </svg>
+                    <span data-en="No Installation Required">Sem Instalação</span>
+                </div>
+                <div class="proof-item">
+                    <svg class="proof-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <rect x="7" y="7" width="3" height="9"/>
+                        <rect x="14" y="7" width="3" height="5"/>
+                    </svg>
+                    <span data-en="6 Templates Included">6 Templates Incluídos</span>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Features Section -->
@@ -487,6 +526,36 @@
             </div>
         </div>
     </footer>
+
+    <!-- Template Modal -->
+    <div class="template-modal" id="template-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <div class="modal-header">
+                <div class="modal-badge" id="modal-badge">ACADEMIC</div>
+                <h2 id="modal-title">Academic Project</h2>
+                <p id="modal-description">Estrutura para trabalho académico completo</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-tree" id="modal-tree">
+                    <!-- Dynamic folder tree will be injected here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-btn-close" data-en="Close">Fechar</button>
+                <button class="btn btn-primary" id="modal-btn-generate" data-en="Generate template">Gerar template</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <span class="toast-message" data-en="Template generated!">Template gerado!</span>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
