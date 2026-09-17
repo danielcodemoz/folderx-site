@@ -317,13 +317,17 @@
         const savedTheme = localStorage.getItem('theme');
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         
+        const applyDark = (on) => {
+            document.body.classList.toggle('dark-theme', on);
+            document.documentElement.classList.toggle('dark-theme', on);
+        };
         if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
-            document.body.classList.add('dark-theme');
+            applyDark(true);
         }
         
         toggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
+            const isDark = !document.body.classList.contains('dark-theme');
+            applyDark(isDark);
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             
             // Recreate canvas animation with new theme colors
