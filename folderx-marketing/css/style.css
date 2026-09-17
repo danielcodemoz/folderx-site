@@ -70,14 +70,15 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Prevent horizontal overflow globally */
+/* Prevent horizontal overflow globally (avoid * { max-width } — breaks flex) */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
 
-* {
+img, video, canvas, svg, iframe {
     max-width: 100%;
+    height: auto;
 }
 
 /* === DARK THEME === */
@@ -112,12 +113,17 @@ body.dark-theme .nav {
     background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.05"/%3E%3C/svg%3E');
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.5;
-    mix-blend-mode: overlay;
+    /* Light mode: disable blend wash-out on white backgrounds */
+    opacity: 0;
+    mix-blend-mode: normal;
+    visibility: hidden;
 }
 
+html.dark-theme .grain-overlay,
 body.dark-theme .grain-overlay {
     opacity: 0.3;
+    mix-blend-mode: overlay;
+    visibility: visible;
 }
 
 .container {
@@ -1228,6 +1234,7 @@ body.dark-theme .feature-title {
     }
     
     .nav-links {
+        flex: 1 1 100%;
         width: 100%;
         justify-content: center;
         gap: 0.75rem;
@@ -1655,4 +1662,28 @@ body.dark-theme .templates {
 body.dark-theme .feature-card {
     background: var(--bg-secondary);
     border-color: var(--border-color);
+}
+
+/* === Light mode contrast (explicit dark text on white) === */
+html:not(.dark-theme) .logo-text,
+body:not(.dark-theme) .logo-text,
+html:not(.dark-theme) .hero-title,
+body:not(.dark-theme) .hero-title,
+html:not(.dark-theme) .section-title,
+body:not(.dark-theme) .section-title,
+html:not(.dark-theme) .feature-title,
+body:not(.dark-theme) .feature-title {
+    color: #0f172a;
+}
+html:not(.dark-theme) .hero-subtitle,
+body:not(.dark-theme) .hero-subtitle,
+html:not(.dark-theme) .feature-desc,
+body:not(.dark-theme) .feature-desc,
+html:not(.dark-theme) .section-subtitle,
+body:not(.dark-theme) .section-subtitle {
+    color: #334155;
+}
+html:not(.dark-theme) .nav-links a:not(.nav-cta),
+body:not(.dark-theme) .nav-links a:not(.nav-cta) {
+    color: #334155;
 }
