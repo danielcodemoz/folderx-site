@@ -1687,3 +1687,69 @@ html:not(.dark-theme) .nav-links a:not(.nav-cta),
 body:not(.dark-theme) .nav-links a:not(.nav-cta) {
     color: #334155;
 }
+
+/* ============================================
+   WCAG AA — correcções de contraste (claro e escuro)
+   ============================================ */
+:root { --teal-700: #0f766e; --teal-800: #115e59; }
+
+/* Botões teal: texto branco precisa de fundo mais escuro (#0f766e = 5.5:1) */
+.nav-cta,
+.btn-primary,
+.download-buttons .btn-primary,
+#modal-btn-generate,
+.toast { background: var(--teal-700); color: #fff; }
+.nav-cta:hover,
+.btn-primary:hover,
+.download-buttons .btn-primary:hover { background: var(--teal-800); }
+.btn-secondary { color: var(--teal-700); border-color: var(--teal-700); }
+.btn-secondary:hover { background: var(--teal-700); color: #fff; }
+body.dark-theme .btn-secondary { background: transparent; color: var(--teal-100); border-color: var(--teal-300); }
+body.dark-theme .btn-secondary:hover { background: var(--teal-300); color: #042f2e; }
+.download-buttons .btn-secondary { color: #fff; }
+
+/* Etiquetas de secção e badges */
+body:not(.dark-theme) .section-tag { background: #e6f6f3; color: var(--teal-700); }
+.template-card-badge.academic { color: var(--teal-700); }
+.template-card-badge.office { color: #c2410c; }
+.template-card-badge.design { color: #6d28d9; }
+.template-card-badge.dev { color: #1d4ed8; }
+
+/* Árvore de pastas (painel sempre escuro) */
+.template-preview { background: #161b1b; }
+.tree-item { color: #e2e8f0; }
+.tree-item:hover { background: rgba(255, 255, 255, 0.07); }
+
+/* Cartões de templates: fundo e texto acompanham o tema */
+.template-card { background: var(--bg-primary); }
+.template-card h3 { color: #0f172a; }
+.template-card p { color: #475569; }
+.template-card small { color: #334155; }
+body.dark-theme .template-card { background: var(--bg-secondary); border-color: var(--border-color); }
+body.dark-theme .template-card h3 { color: #f8fafc; }
+body.dark-theme .template-card p { color: #94a3b8; }
+body.dark-theme .template-card small { color: #cbd5e1; }
+body.dark-theme .template-card-badge.academic { background: rgba(45, 212, 191, 0.14); color: var(--teal-100); }
+body.dark-theme .template-card-badge.design { background: rgba(167, 139, 250, 0.16); color: #c4b5fd; }
+body.dark-theme .template-card-badge.dev { background: rgba(96, 165, 250, 0.16); color: #93c5fd; }
+body.dark-theme .template-card-badge.office { background: rgba(251, 146, 60, 0.16); color: #fdba74; }
+body.dark-theme .templates-intro { color: #cbd5e1; }
+
+/* Galeria: cartões do tamanho da imagem, fundo escuro, sem espaço branco */
+body.dark-theme .gallery { background: var(--bg-primary); }
+.gallery-grid { align-items: start; }
+.gallery-item { background: #0f1414; aspect-ratio: 16 / 10; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.gallery-caption { background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0)); color: #fff; }
+
+/* Rodapé (sempre escuro) */
+.footer { color: #cbd5e1; }
+html:not(.dark-theme) .footer-brand .logo-text,
+body:not(.dark-theme) .footer-brand .logo-text,
+.footer-brand .logo-text { color: #fff; }
+.footer-tagline,
+.footer-col a,
+.footer-bottom { color: #a3aab3; }
+.footer-col a:hover { color: var(--teal-100); }
+.footer-col h4 { color: #fff; }
+.footer .dp-apoiar-btn { color: #e2e8f0; }
