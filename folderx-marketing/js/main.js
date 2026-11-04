@@ -352,6 +352,7 @@
         const setLanguage = (lang) => {
             currentLang = lang;
             localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang === 'en' ? 'en' : 'pt';
             
             ptBtn.classList.toggle('active', lang === 'pt');
             enBtn.classList.toggle('active', lang === 'en');

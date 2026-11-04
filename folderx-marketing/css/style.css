@@ -1856,3 +1856,23 @@ body:not(.dark-theme) .footer-brand .logo-text,
     .template-modal .modal-footer { padding: .75rem 1.25rem 1.25rem; }
     .template-modal .modal-footer .btn { flex: 1; justify-content: center; }
 }
+
+/* Apoiar modal — FOLDER X teal, light and dark */
+:root {
+    --dp-support-accent: #14b8a6;
+    --dp-support-bg: #ffffff;
+    --dp-support-fg: #1a1a1a;
+    --dp-support-muted: #4a4a4a;
+    --dp-support-line: #e5e5e5;
+    --dp-support-card: #f8fffe;
+    --dp-support-glow: rgba(20, 184, 166, 0.2);
+}
+html.dark-theme {
+    --dp-support-accent: #2dd4bf;
+    --dp-support-bg: #0f1818;
+    --dp-support-fg: #f8fafc;
+    --dp-support-muted: #cbd5e1;
+    --dp-support-line: #2a3838;
+    --dp-support-card: #142020;
+    --dp-support-glow: rgba(45, 212, 191, 0.28);
+}
